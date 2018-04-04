@@ -71,26 +71,30 @@ public class ProcessJSON {
     }
 
     public static String processJsonToString(JSONObject inputJSONObject) {
-        List<String> processedData = processJsonToList(inputJSONObject);
+        List<List<String>> processedData = processJsonToList(inputJSONObject);
+        StringBuilder processedString = new StringBuilder();
         if (CollectionUtils.isNotEmpty(processedData)) {
-            return StringUtils.join(processedData, '\n');
+            for (List<String> data : processedData) {
+                processedString.append(StringUtils.join(data, ',')).append("\n");
+            }
+            return processedString.toString();
         }
         return StringUtils.EMPTY;
     }
 
-    public static List<String> processJsonToList(JSONObject inputJSONObject) {
+    public static List<List<String>> processJsonToList(JSONObject inputJSONObject) {
         JSONArray jsonArray = new JSONArray(inputJSONObject.getJSONArray("hits").toString());
-        List<String> processedData = new ArrayList<>();
+        List<List<String>> processedData = new ArrayList<>();
         if (jsonArray != null && jsonArray.length() > 1) {
             LOGGER.info("Number of hits: " + jsonArray.length());
             for (int i = 0; i < jsonArray.length(); i++) {
                 if (i == 0) {
                     List<String> header = createHeaderForReport((JSONObject) jsonArray.get(i), new ArrayList<>());
-                    processedData.add(StringUtils.join(header, ','));
+                    processedData.add(header);
                 }
                 JSONObject object = (JSONObject) jsonArray.get(i);
                 List<String> data = createDataForReport(object, new ArrayList<>());
-                processedData.add(StringUtils.join(data, ','));
+                processedData.add(data);
             }
         }
         return processedData;
