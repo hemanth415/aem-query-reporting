@@ -1,6 +1,7 @@
 package execute;
 
-import helper.JSON2CSV;
+import helper.ProcessJSON;
+import helper.ReportCreator;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -28,7 +29,7 @@ public class ExecuteCurl {
         String url = "http://localhost:4502/bin/querybuilder.json?p.hits=selective&p.limit=-1&p.properties=jcr%3apath%20%2c%20%20" +
                 "jcr%3acontent%2fjcr%3atitle%20%2c%20%20jcr%3acontent%2fcq%3alastModifiedBy%20%2c%20jcr%3acontent%2fcq%3alastModified&" +
                 "path=%2fcontent%2fgeometrixx-outdoors%2fen%2fbadges&type=cq%3aPage";
-        String outputFilePath = "/Users/temp/Downloads/report-"+System.currentTimeMillis()+".csv";
+        String outputFilePath = "/Users/hemanthponnuru/Downloads/report-"+System.currentTimeMillis()+".csv";
 
         /*
         *
@@ -42,17 +43,16 @@ public class ExecuteCurl {
         *
         * */
 
-        //Creat command to be execution
+        //Create command to be execution
         CreateCURL createCURL = new CreateCURL.Builder().setUsername(username).setPassword(password).setUrl(url).build();
-
         //Command be processed
         ProcessBuilder process = new ProcessBuilder(createCURL.getCommands());
         Process p;
         try {
             p = process.start();
             String jsonString = IOUtils.toString(p.getInputStream(), StandardCharsets.UTF_8.name());
-            String csvString = JSON2CSV.processJSON(new JSONObject(jsonString)).toString();
-            JSON2CSV.writeToCSVFile(outputFilePath, csvString);
+            String csvString = ProcessJSON.processJsonToString(new JSONObject(jsonString));
+            ReportCreator.writeToCSVFile(outputFilePath, csvString);
         } catch (IOException e) {
             LOGGER.error(e);
         }
