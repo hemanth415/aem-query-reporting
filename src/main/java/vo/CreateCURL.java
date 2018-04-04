@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hemanthponnuru on 4/3/18
+ * Created by hemanth on 4/3/18
  * CURL properties reference from https://curl.haxx.se/docs/manual.html
  * Current purpose is to create a CURL command is get a JSON file over HTTP/HTTPS with user information.
  * Builder pattern is being used. (https://jlordiales.me/2012/12/13/the-builder-pattern-in-practice/)

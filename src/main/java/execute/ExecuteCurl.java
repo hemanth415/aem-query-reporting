@@ -9,6 +9,9 @@ import vo.CreateCURL;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Created by hemanth on 4/2/18
+ */
 public class ExecuteCurl {
 
     private static final Logger LOGGER = Logger.getLogger(ExecuteCurl.class);
@@ -25,7 +28,7 @@ public class ExecuteCurl {
         String url = "http://localhost:4502/bin/querybuilder.json?p.hits=selective&p.limit=-1&p.properties=jcr%3apath%20%2c%20%20" +
                 "jcr%3acontent%2fjcr%3atitle%20%2c%20%20jcr%3acontent%2fcq%3alastModifiedBy%20%2c%20jcr%3acontent%2fcq%3alastModified&" +
                 "path=%2fcontent%2fgeometrixx-outdoors%2fen%2fbadges&type=cq%3aPage";
-        String outputFilePath = "/Users/hemanthponnuru/Downloads/report-"+System.currentTimeMillis()+".csv";
+        String outputFilePath = "/Users/temp/Downloads/report-"+System.currentTimeMillis()+".csv";
 
         /*
         *

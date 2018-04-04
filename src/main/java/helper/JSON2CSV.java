@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
+/**
+ * Created by hemanth on 4/2/18
+ */
 public class JSON2CSV {
 
     private static final Logger LOGGER = Logger.getLogger(JSON2CSV.class);
