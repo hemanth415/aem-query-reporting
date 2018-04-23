@@ -13,11 +13,11 @@ import java.util.List;
 /**
  * Created by hemanth on 4/2/18
  */
+@Deprecated
 public class ProcessJSON {
 
     private static final Logger LOGGER = Logger.getLogger(ProcessJSON.class);
 
-    @Deprecated
     public static StringBuilder processJSON(JSONObject inputJSONObject) {
         JSONArray jsonArray = new JSONArray(inputJSONObject.getJSONArray("hits").toString());
         StringBuilder sb = new StringBuilder();

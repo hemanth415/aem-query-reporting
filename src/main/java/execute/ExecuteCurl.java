@@ -1,15 +1,21 @@
 package execute;
 
+import helper.ProcessDataWithJsonArray;
 import helper.ProcessJSON;
+import helper.ProcessingJSON;
 import helper.ReportCreator;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import vo.CreateCURL;
+import vo.DataVO;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hemanth on 4/2/18
@@ -52,10 +58,11 @@ public class ExecuteCurl {
         try {
             p = process.start();
             String jsonString = IOUtils.toString(p.getInputStream(), StandardCharsets.UTF_8.name());
-            String csvString = ProcessJSON.processJsonToString(new JSONObject(jsonString));
-            List<List<String>> xlxsData = ProcessJSON.processJsonToList(new JSONObject(jsonString));
-            ReportCreator.writeToCSVFile(outputFilePath, csvString);
-            ReportCreator.writeToXLSXFile(outputFilePath, xlxsData);
+            DataVO dataVO = ProcessingJSON.processJSON(jsonString);
+            //String string = FileUtils.readFileToString(new File("files/json-testing-format-1.json"), StandardCharsets.UTF_8.name());
+            //DataVO dataVO = ProcessingJSON.processJSON(string);
+            ReportCreator.writeToCSVFile(outputFilePath, dataVO);
+            ReportCreator.writeToXLSXFile(outputFilePath, dataVO);
         } catch (IOException e) {
             LOGGER.error(e);
         }
