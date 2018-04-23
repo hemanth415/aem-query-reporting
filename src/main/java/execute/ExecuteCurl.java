@@ -1,15 +1,14 @@
 package execute;
 
-import helper.ProcessJSON;
+import helper.ProcessingJSON;
 import helper.ReportCreator;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 import vo.CreateCURL;
+import vo.DataVO;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 /**
  * Created by hemanth on 4/2/18
@@ -33,16 +32,16 @@ public class ExecuteCurl {
         String outputFilePath = "/Users/hemanth/Downloads/report"+System.currentTimeMillis();
 
         /*
-        *
-        * Query under use -
-        *
-        * path=/content/geometrixx-outdoors/en/badges
-        * type=cq:Page
-        * p.hits=selective
-        * p.properties=  jcr:path ,  jcr:content/jcr:title ,  jcr:content/cq:lastModifiedBy , jcr:content/cq:lastModified
-        * p.limit=-1
-        *
-        * */
+         *
+         * Query under use -
+         *
+         * path=/content/geometrixx-outdoors/en/badges
+         * type=cq:Page
+         * p.hits=selective
+         * p.properties=  jcr:path ,  jcr:content/jcr:title ,  jcr:content/cq:lastModifiedBy , jcr:content/cq:lastModified
+         * p.limit=-1
+         *
+         * */
 
         //Create command to be execution
         CreateCURL createCURL = new CreateCURL.Builder().setUsername(username).setPassword(password).setUrl(url).build();
@@ -52,10 +51,11 @@ public class ExecuteCurl {
         try {
             p = process.start();
             String jsonString = IOUtils.toString(p.getInputStream(), StandardCharsets.UTF_8.name());
-            String csvString = ProcessJSON.processJsonToString(new JSONObject(jsonString));
-            List<List<String>> xlxsData = ProcessJSON.processJsonToList(new JSONObject(jsonString));
-            ReportCreator.writeToCSVFile(outputFilePath, csvString);
-            ReportCreator.writeToXLSXFile(outputFilePath, xlxsData);
+            DataVO dataVO = ProcessingJSON.processJSON(jsonString);
+            //String string = FileUtils.readFileToString(new File("files/json-testing-format-1.json"), StandardCharsets.UTF_8.name());
+            //DataVO dataVO = ProcessingJSON.processJSON(string);
+            ReportCreator.writeToCSVFile(outputFilePath, dataVO);
+            ReportCreator.writeToXLSXFile(outputFilePath, dataVO);
         } catch (IOException e) {
             LOGGER.error(e);
         }

@@ -1,0 +1,44 @@
+{
+    "success": true,
+    "results": 2,
+    "total": 2,
+    "more": false,
+    "offset": 0,
+    "hits": [
+    {
+        "jcr:path": "/content/geometrixx-outdoors/en/women/shorts/fiji-sport",
+        "jcr:content":
+        {
+            "customArrayLevel1": [
+                {
+        			"customObject1": "value--11",
+        			"customObject2": "value--22"
+        		}, 
+                {
+        			"customObject1": "value--33",
+        			"customObject2": "value--44"
+        		}
+            ],
+            "cq:lastModifiedBy": "admin",
+            "jcr:title": "Fiji Sport"
+        }
+    },
+    {
+        "jcr:path": "/content/geometrixx-outdoors/en/women/shorts/tahiti-summer",
+        "jcr:content":
+        {
+            "customArrayLevel1": [
+                {
+        			"customObject1": "value--55",
+        			"customObject2": "value--66"
+        		}, 
+                {
+        			"customObject1": "value--77",
+        			"customObject2": "value--88"
+        		}
+            ],
+            "cq:lastModifiedBy": "admin",
+            "jcr:title": "Tahiti Summer"
+        }
+    }]
+}
