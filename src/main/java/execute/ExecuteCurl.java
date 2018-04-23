@@ -1,21 +1,14 @@
 package execute;
 
-import helper.ProcessDataWithJsonArray;
-import helper.ProcessJSON;
 import helper.ProcessingJSON;
 import helper.ReportCreator;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 import vo.CreateCURL;
 import vo.DataVO;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by hemanth on 4/2/18
@@ -39,16 +32,16 @@ public class ExecuteCurl {
         String outputFilePath = "/Users/hemanth/Downloads/report"+System.currentTimeMillis();
 
         /*
-        *
-        * Query under use -
-        *
-        * path=/content/geometrixx-outdoors/en/badges
-        * type=cq:Page
-        * p.hits=selective
-        * p.properties=  jcr:path ,  jcr:content/jcr:title ,  jcr:content/cq:lastModifiedBy , jcr:content/cq:lastModified
-        * p.limit=-1
-        *
-        * */
+         *
+         * Query under use -
+         *
+         * path=/content/geometrixx-outdoors/en/badges
+         * type=cq:Page
+         * p.hits=selective
+         * p.properties=  jcr:path ,  jcr:content/jcr:title ,  jcr:content/cq:lastModifiedBy , jcr:content/cq:lastModified
+         * p.limit=-1
+         *
+         * */
 
         //Create command to be execution
         CreateCURL createCURL = new CreateCURL.Builder().setUsername(username).setPassword(password).setUrl(url).build();
