@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <name>Application Build</name>
-    <description>This is the parent POM of Corning CMS project.</description>
+    <description>Custom Reporting tool for large data sets.</description>
 
     <dependencies>
         <!-- JSON.org -->
